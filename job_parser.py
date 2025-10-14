@@ -1,7 +1,13 @@
 import spacy
+import subprocess
+import sys
 
-# Load English NLP model
-nlp = spacy.load("en_core_web_sm")
+# Ensure the spaCy model is available
+try:
+    nlp = spacy.load("en_core_web_sm")
+except OSError:
+    subprocess.run([sys.executable, "-m", "spacy", "download", "en_core_web_sm"])
+    nlp = spacy.load("en_core_web_sm")
 
 def extract_keywords(text):
     """
