@@ -2,7 +2,7 @@ import spacy
 import subprocess
 import sys
 
-# Ensure the spaCy model is available
+# Ensure spaCy model is available
 try:
     nlp = spacy.load("en_core_web_sm")
 except OSError:
@@ -17,4 +17,4 @@ def extract_keywords(text):
     """
     doc = nlp(text)
     keywords = [token.text.lower() for token in doc if token.is_alpha and not token.is_stop]
-    return list(set(keywords))  # remove duplicates
+    return list(set(keywords))
