@@ -1,9 +1,12 @@
 streamlit
+spacy
 pdfminer.six
 pandas
 numpy
 scikit-learn
-spacy
 nltk
 python-docx
 PyPDF2
+openai
+requests
+beautifulsoup4
