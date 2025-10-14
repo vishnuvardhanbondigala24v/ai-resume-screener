@@ -10,3 +10,6 @@ PyPDF2
 openai
 requests
 beautifulsoup4
+matplotlib
+
+
