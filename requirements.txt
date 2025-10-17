@@ -11,5 +11,7 @@ openai
 requests
 beautifulsoup4
 matplotlib
+pdfminer.six
+
 
 
