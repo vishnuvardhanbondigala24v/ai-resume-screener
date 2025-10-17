@@ -8,11 +8,13 @@ import matplotlib.pyplot as plt
 # Page config
 st.set_page_config(page_title="AI Resume Screener", layout="wide")
 
-# Title and description
+# Optional logo
+# st.image("logo.png", width=120)
+
 st.title("📄 AI Resume Screener")
 st.markdown("Use this tool to compare your resume against a job description and get smart suggestions to improve your match.")
 
-# Sidebar for file uploads
+# Sidebar
 st.sidebar.header("📂 Upload Your Files")
 resume_file = st.sidebar.file_uploader("Resume (PDF)", type=["pdf"])
 job_file = st.sidebar.file_uploader("Job Description (PDF)", type=["pdf"])
@@ -30,7 +32,7 @@ if resume_file and job_file:
     with open(job_path, "wb") as f:
         f.write(job_file.getbuffer())
 
-    # Extract text from files
+    # Extract text
     resume_text = extract_resume_text(resume_path)
     job_text = extract_resume_text(job_path)
 
@@ -49,20 +51,20 @@ if resume_file and job_file:
     col1.metric("Matched Keywords", len(matched_keywords))
     col2.metric("Unmatched Keywords", len(unmatched_keywords))
 
-    # Bar chart visualization
+    # Bar chart
     fig, ax = plt.subplots()
     ax.bar(["Matched", "Unmatched"], [len(matched_keywords), len(unmatched_keywords)], color=["green", "red"])
     ax.set_ylabel("Number of Keywords")
     ax.set_title("Resume vs Job Keyword Match")
     st.pyplot(fig)
 
-    # Expanders for keyword lists
+    # Expanders
     with st.expander("✅ Matched Keywords"):
         st.write(", ".join(matched_keywords))
     with st.expander("❌ Unmatched Keywords"):
         st.write(", ".join(unmatched_keywords))
 
-    # Suggestions to improve resume
+    # Suggestions
     st.header("💡 Smart Suggestions to Improve Your Resume")
     if unmatched_keywords:
         st.write("Consider adding these keywords or skills to better match the job description:")
@@ -75,11 +77,10 @@ if resume_file and job_file:
     else:
         st.success("Your resume already covers all the key terms from the job description. Great job!")
 
-    # Expanders to view raw text
+    # Raw text views
     with st.expander("📄 See Resume Text"):
         st.write(resume_text)
     with st.expander("📄 See Job Description Text"):
         st.write(job_text)
 
-# Footer
 st.markdown("---")
